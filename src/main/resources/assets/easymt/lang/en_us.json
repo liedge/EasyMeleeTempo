@@ -1,0 +1,5 @@
+{
+  "msg.easymt.current": "Current EasyMT mode: %s",
+  "msg.easymt.switch_success": "Switched EasyMT mode to %s",
+  "msg.easymt.switch_fail": "EasyMT mode already %s"
+}

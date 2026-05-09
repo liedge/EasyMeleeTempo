@@ -20,8 +20,20 @@ public final class EMTEventHandler
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null && player.getAttackStrengthScale(0f) < 1f)
             {
-                event.setCanceled(true);
-                event.setSwingHand(false);
+                AttackMode mode = EMTConfig.INSTANCE.attackMode.get();
+                boolean cancelAttack = switch (mode)
+                {
+                    case DISABLED -> false;
+                    case SHIFT_TO_ENABLE -> player.isShiftKeyDown();
+                    case SHIFT_TO_DISABLE -> !player.isShiftKeyDown();
+                    case ALWAYS_ON -> true;
+                };
+
+                if (cancelAttack)
+                {
+                    event.setCanceled(true);
+                    event.setSwingHand(false);
+                }
             }
         }
     }
